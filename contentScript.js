@@ -11,8 +11,29 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 });
 
 class Options {
+    /*
+    [
+        tracked hours
+    ]
+     */
     _hours;
+    /*
+    {
+        key: afterHours,
+        value: how much break (min)
+    }
+     */
     _breaks;
+    /*
+    {
+        beforeBreak: [
+            min before autopause
+        ],
+        atHour: [
+            notificate on this time
+        ]
+    }
+     */
     _notifications;
 
     get hours() {
