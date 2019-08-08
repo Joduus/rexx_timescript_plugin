@@ -44,7 +44,6 @@ class TimeManagement {
                 state: stateEntries.children[i].querySelector('a').text
             };
         }
-        console.log(this._timeEntries);
     }
 
     appendHtml() {
