@@ -15,7 +15,11 @@
       "matches": ["https://*/times/time/calendar_list.php*"],
       "run_at": "document_idle",
       "all_frames": true,
-      "js": ["contentScript.js"]
+      "js": [
+        "Timemanagement.js",
+        "Options.js",
+        "contentScript.js"
+      ]
     }
   ],
   "background": {
