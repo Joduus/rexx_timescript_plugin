@@ -5,30 +5,23 @@ class TimeManagement {
     _options;
 
     /*
-    {
-        {
-            datetime,
-            state(kommen, gehen)
-        },
-        {
-            datetime,
-            state
-        }
-    }
-     */
-    _timeEntries = {};
-
-    /*
     Holds all Handlers for the main loop defined in configureMainLoop
      */
     _mainLoopHandlers = [];
 
+    /*
+    Holds timeEntries Object
+     */
+    _timeEntries;
+
+    /*
+    Html for the view
+     */
     _menuBarHtml = '';
 
     constructor(options) {
         this._options = options;
-
-        this.getTodayTimeEntries();
+        this._timeEntries = new TimeEntries();
 
         this.configureMainLoop();
 
@@ -36,31 +29,11 @@ class TimeManagement {
     }
 
     configureMainLoop() {
-        let notificationHandler = new NotificationHandler(this._options.notifications);
-        let worktimeHandler = new WorktimeHandler(this._options.hours, notificationHandler);
-        let breaktimeHandler = new BreaktimeHandler(this._options.breaks, notificationHandler);
+        let notificationHandler = new NotificationHandler(this._options.notifications, this._timeEntries);
+        let worktimeHandler = new WorktimeHandler(this._options.hours, this._timeEntries, notificationHandler);
+        let breaktimeHandler = new BreaktimeHandler(this._options.breaks, this._timeEntries, notificationHandler);
 
         this._mainLoopHandlers.push(worktimeHandler, breaktimeHandler, notificationHandler);
-    }
-
-    getTodayTimeEntries() {
-        let todayTimeEntriesContainer = document.querySelector('.grid_table .grid_row_highlight_today');
-        let timeEntries = todayTimeEntriesContainer.children[2].children[0];
-        let stateEntries = todayTimeEntriesContainer.children[1].children[0];
-
-        if (timeEntries.children.length === 0) {
-            setTimeout(this.getTodayTimeEntries, 5000);
-            return;
-        }
-
-        let today = new Date();
-        let todayDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        for (let i = 0; timeEntries.children.length > i; i++) {
-            this._timeEntries[i] = {
-                time: new Date(todayDate + ' ' + timeEntries.children[i].querySelector('span').textContent),
-                state: stateEntries.children[i].querySelector('a').text
-            };
-        }
     }
 
     appendHtml() {
