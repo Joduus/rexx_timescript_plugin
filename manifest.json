@@ -16,6 +16,9 @@
       "run_at": "document_idle",
       "all_frames": true,
       "js": [
+        "NotificationHandler.js",
+        "WorktimeHandler.js",
+        "BreaktimeHandler.js",
         "Timemanagement.js",
         "Options.js",
         "contentScript.js"
