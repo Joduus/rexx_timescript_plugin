@@ -25,7 +25,5 @@ class NotificationHandler {
 
     }
 
-    getHtml() {
-        return '';
-    }
+    getHtml = () => '';
 }

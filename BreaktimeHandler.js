@@ -15,7 +15,5 @@ class BreaktimeHandler {
 
     }
 
-    getHtml() {
-        return '';
-    }
+    getHtml = () => '';
 }

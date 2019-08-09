@@ -15,7 +15,5 @@ class WorktimeHandler {
 
     }
 
-    getHtml() {
-        return '';
-    }
+    getHtml = () => '';
 }
