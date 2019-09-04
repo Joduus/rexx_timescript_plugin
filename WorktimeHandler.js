@@ -15,5 +15,16 @@ class WorktimeHandler {
         console.log('WorktimeHandler');
     }
 
-    getHtml = () => '';
+    getHtml = () => `
+<li class="navbar_txt">
+    <a title="Arbeitszeit" id="nav_infotxt_worktime_string">
+        Arbeitszeit:
+    </a>
+</li>
+<li class="navbar_txt noUserSelect">
+    <a title="Arbeitszeit heute" id="nav_infotxt_worktime">
+    </a>
+</li>
+`;
+
 }
