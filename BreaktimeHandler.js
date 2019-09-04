@@ -12,7 +12,7 @@ class BreaktimeHandler {
     }
 
     run() {
-
+        console.log('BreaktimeHandler');
     }
 
     getHtml = () => '';

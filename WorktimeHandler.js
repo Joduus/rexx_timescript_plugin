@@ -12,7 +12,7 @@ class WorktimeHandler {
     }
 
     run() {
-
+        console.log('WorktimeHandler');
     }
 
     getHtml = () => '';

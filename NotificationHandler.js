@@ -3,6 +3,8 @@ class NotificationHandler {
 
     _timeEntries;
 
+    _notificationQueue = [];
+
     _permissionGranted = false;
 
     constructor(options, timeEntries) {
@@ -22,7 +24,7 @@ class NotificationHandler {
     }
 
     run() {
-
+        console.log('NotificationHandler');
     }
 
     getHtml = () => '';

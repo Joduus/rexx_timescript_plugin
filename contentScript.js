@@ -17,6 +17,6 @@ function init() {
 }
 
 function main(options) {
-    let timeManagement = new TimeManagement(options);
+    const timeManagement = new TimeManagement(options);
     timeManagement.run();
 }
