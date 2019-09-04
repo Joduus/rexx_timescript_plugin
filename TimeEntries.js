@@ -27,7 +27,7 @@ class TimeEntries {
         const stateEntries = todayTimeEntriesContainer.children[1].children[0];
 
         if (timeEntries.children.length === 0) {
-            console.warn("Keine Zeiteinträge für heute gefunden");
+            console.warn("Keine ZeiteintrÃ¤ge fÃ¼r heute gefunden");
             setTimeout(this.getTodayTimeEntries, 5000);
             return;
         }
