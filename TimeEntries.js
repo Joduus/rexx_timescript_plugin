@@ -21,6 +21,10 @@ class TimeEntries {
         return this._timeEntries;
     }
 
+    get entryLength() {
+        return Object.keys(this._timeEntries).length;
+    }
+
     getTodayTimeEntries() {
         const todayTimeEntriesContainer = document.querySelector('.grid_table .grid_row_highlight_today');
         const timeEntries = todayTimeEntriesContainer.children[2].children[0];

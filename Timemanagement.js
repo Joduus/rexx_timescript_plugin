@@ -23,6 +23,10 @@ class TimeManagement {
         this._options = options;
         this._timeEntries = new TimeEntries();
 
+        if (this._timeEntries.entryLength === 0) {
+            return
+        }
+
         this.configureMainLoop();
 
         this.appendHtml();
@@ -49,12 +53,14 @@ class TimeManagement {
     }
 
     run() {
-        setInterval(() => {
-            for (let i = 0; this._mainLoopHandlers.length > i; i++) {
-                let handler = this._mainLoopHandlers[i];
+        if (Object.keys(this._mainLoopHandlers).length !== 0) {
+            setInterval(() => {
+                for (let i = 0; this._mainLoopHandlers.length > i; i++) {
+                    let handler = this._mainLoopHandlers[i];
 
-                handler.run();
-            }
-        }, 1000)
+                    handler.run();
+                }
+            }, 1000);
+        }
     }
 }
