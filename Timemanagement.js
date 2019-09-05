@@ -53,14 +53,16 @@ class TimeManagement {
     }
 
     run() {
-        if (Object.keys(this._mainLoopHandlers).length !== 0) {
-            setInterval(() => {
-                for (let i = 0; this._mainLoopHandlers.length > i; i++) {
-                    let handler = this._mainLoopHandlers[i];
-
-                    handler.run();
-                }
-            }, 1000);
+        if (Object.keys(this._mainLoopHandlers).length === 0) {
+            return;
         }
+
+        setInterval(() => {
+            for (let i = 0; this._mainLoopHandlers.length > i; i++) {
+                let handler = this._mainLoopHandlers[i];
+
+                handler.run();
+            }
+        }, 1000);
     }
 }
