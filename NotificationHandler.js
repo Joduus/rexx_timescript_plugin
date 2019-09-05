@@ -1,13 +1,18 @@
 class NotificationHandler {
     _options;
 
+    /*
+     * class timemanagement
+     */
+    _timeManagement;
+
     _timeEntries;
 
     _notificationQueue = [];
 
     _permissionGranted = false;
 
-    constructor(options, timeEntries) {
+    constructor(options, timeEntries, timeManagement) {
         Notification.requestPermission().then((result) => {
             if (result === 'denied') {
                 console.log('Permission wasn\'t granted. Allow a retry.');
@@ -20,11 +25,11 @@ class NotificationHandler {
         });
 
         this._options = options;
+        this._timeManagement = timeManagement;
         this._timeEntries = timeEntries;
     }
 
-    run() {
-        console.log('NotificationHandler');
+    run(currentTime) {
     }
 
     getHtml = () => '';

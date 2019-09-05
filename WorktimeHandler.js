@@ -1,18 +1,36 @@
 class WorktimeHandler {
+    _domIds = {
+        worktime: 'nav_infotxt_worktime'
+    };
+
+    /*
+     * class Timemanagement
+     */
+    _timeManagement;
+
+    /*
+     * class NotificationHandler
+     */
     _notificationHandler;
 
+    /*
+     * class TimeEntries
+     */
     _timeEntries;
 
-    _options;
+    _hourData;
 
-    constructor(options, timeEntries, notificationHandler) {
-        this._options = options;
+    _currentTime;
+
+    constructor(hourData, timeEntries, timeManagement) {
+        this._hourData = hourData;
         this._timeEntries = timeEntries;
-        this._notificationHandler = notificationHandler;
+        this._timeManagement = timeManagement;
+        this._notificationHandler = this._timeManagement.notificationHandler;
     }
 
-    run() {
-        console.log('WorktimeHandler');
+    run(currentTime) {
+        this._currentTime = currentTime;
     }
 
     getHtml = () => `

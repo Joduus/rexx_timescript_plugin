@@ -33,11 +33,12 @@ class TimeManagement {
     }
 
     configureMainLoop() {
-        let notificationHandler = new NotificationHandler(this._options.notifications, this._timeEntries);
-        let worktimeHandler = new WorktimeHandler(this._options.hours, this._timeEntries, notificationHandler);
-        let breaktimeHandler = new BreaktimeHandler(this._options.breaks, this._timeEntries, notificationHandler);
+        this.notificationHandler = new NotificationHandler(this._options.notifications, this._timeEntries, this);
+        this.worktimeHandler = new WorktimeHandler(this._options.hours, this._timeEntries, this);
+        this.breaktimeHandler = new BreaktimeHandler(this._options.breaks, this._timeEntries, this);
+        this.timeEntryWatcher = new TimeEntryWatcher(this._timeEntries, this);
 
-        this._mainLoopHandlers.push(worktimeHandler, breaktimeHandler, notificationHandler);
+        this._mainLoopHandlers.push(this.timeEntryWatcher, this.worktimeHandler, this.breaktimeHandler, this.notificationHandler);
     }
 
     appendHtml() {
@@ -60,8 +61,9 @@ class TimeManagement {
         setInterval(() => {
             for (let i = 0; this._mainLoopHandlers.length > i; i++) {
                 let handler = this._mainLoopHandlers[i];
+                let currentTime = new Date();
 
-                handler.run();
+                handler.run(currentTime);
             }
         }, 1000);
     }

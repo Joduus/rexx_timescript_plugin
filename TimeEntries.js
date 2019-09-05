@@ -1,17 +1,17 @@
 class TimeEntries {
     /*
-    {
+    [
         {
-            datetime,
-            state(kommen, gehen)
+            time: datetime,
+            state: state(kommen, gehen)
         },
         {
             datetime,
             state
         }
-    }
+    ]
      */
-    _timeEntries = {};
+    _timeEntries = [];
 
     constructor() {
         this.getTodayTimeEntries();
@@ -22,7 +22,7 @@ class TimeEntries {
     }
 
     get entryLength() {
-        return Object.keys(this._timeEntries).length;
+        return this._timeEntries.length;
     }
 
     getTodayTimeEntries() {
@@ -32,7 +32,6 @@ class TimeEntries {
 
         if (timeEntries.children.length === 0) {
             console.warn("Keine Zeiteinträge für heute gefunden");
-            setTimeout(this.getTodayTimeEntries, 5000);
             return;
         }
 
