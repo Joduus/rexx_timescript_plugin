@@ -10,6 +10,11 @@ class TimeManagement {
     _mainLoopHandlers = [];
 
     /*
+     * Holds all handlers with crossHandlerAccess
+     */
+    _handler = {};
+
+    /*
     Holds timeEntries Object
      */
     _timeEntries;
@@ -33,10 +38,15 @@ class TimeManagement {
     }
 
     configureMainLoop() {
-        this.notificationHandler = new NotificationHandler(this._options.notifications, this._timeEntries, this);
-        this.worktimeHandler = new WorktimeHandler(this._options.hours, this._timeEntries, this);
-        this.breaktimeHandler = new BreaktimeHandler(this._options.breaks, this._timeEntries, this);
-        this.timeEntryWatcher = new TimeEntryWatcher(this._timeEntries, this);
+        this.notificationHandler = new NotificationHandler(this._options.notifications, this._timeEntries, this._handler);
+        this.worktimeHandler = new WorktimeHandler(this._options.hours, this._timeEntries, this._handler);
+        this.breaktimeHandler = new BreaktimeHandler(this._options.breaks, this._timeEntries, this._handler);
+        this.timeEntryWatcher = new TimeEntryWatcher(this._timeEntries, this._handler);
+
+        this._handler.notificationHandler = this.notificationHandler;
+        this._handler.worktimeHandler = this.worktimeHandler;
+        this._handler.breaktimeHandler = this.breaktimeHandler;
+        this._handler.timeEntryWatcher = this.timeEntryWatcher;
 
         this._mainLoopHandlers.push(this.timeEntryWatcher, this.worktimeHandler, this.breaktimeHandler, this.notificationHandler);
     }

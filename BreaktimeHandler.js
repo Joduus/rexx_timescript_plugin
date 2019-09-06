@@ -8,15 +8,15 @@ class BreaktimeHandler {
     /*
      * class timemanagement
      */
-    _timeManagement;
+    _handler;
 
     _currentTime;
 
-    constructor(options, timeEntries,  timeManagement) {
+    constructor(options, timeEntries,  handler) {
         this._options = options;
-        this._timeManagement = timeManagement;
+        this._handler = handler;
         this._timeEntries = timeEntries;
-        this._notificationHandler = this._timeManagement.notificationHandler;
+        this._notificationHandler = this._handler.notificationHandler;
     }
 
     run(currentTime) {

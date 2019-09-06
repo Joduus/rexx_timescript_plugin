@@ -6,7 +6,7 @@ class WorktimeHandler {
     /*
      * class Timemanagement
      */
-    _timeManagement;
+    _handler;
 
     /*
      * class NotificationHandler
@@ -22,15 +22,17 @@ class WorktimeHandler {
 
     _currentTime;
 
-    constructor(hourData, timeEntries, timeManagement) {
+    constructor(hourData, timeEntries, handler) {
         this._hourData = hourData;
         this._timeEntries = timeEntries;
-        this._timeManagement = timeManagement;
-        this._notificationHandler = this._timeManagement.notificationHandler;
+        this._handler = handler;
+        this._notificationHandler = this._handler.notificationHandler;
     }
 
     run(currentTime) {
         this._currentTime = currentTime;
+
+        this.updateWorktime();
     }
 
     getHtml = () => `
@@ -44,5 +46,9 @@ class WorktimeHandler {
     </a>
 </li>
 `;
+
+    updateWorktime() {
+
+    }
 
 }

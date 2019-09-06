@@ -2,15 +2,15 @@ class TimeEntryWatcher {
     /*
      * class timemanagement
      */
-    _timeManagement;
+    _handler;
 
     _timeEntries;
 
     _currentTime;
 
-    constructor(timeEntries, timeManagement) {
+    constructor(timeEntries, handler) {
         this._timeEntries = timeEntries;
-        this._timeManagement = timeManagement;
+        this._handler = handler;
     }
 
     run(currentTime) {
