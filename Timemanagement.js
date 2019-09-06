@@ -5,7 +5,7 @@ class TimeManagement {
     _options;
 
     /*
-    Holds all Handlers for the main loop defined in configureMainLoop
+    Holds all Handlers for the main loop defined in configure
      */
     _mainLoopHandlers = [];
 
@@ -28,36 +28,82 @@ class TimeManagement {
         this._options = options;
         this._timeEntries = new TimeEntries();
 
+        // Abort program when no time entries are available
         if (this._timeEntries.entryLength === 0) {
             return
         }
 
-        this.configureMainLoop();
+        this.configure();
 
         this.appendHtml();
     }
 
-    configureMainLoop() {
-        this.notificationHandler = new NotificationHandler(this._options.notifications, this._timeEntries, this._handler);
-        this.worktimeHandler = new WorktimeHandler(this._options.hours, this._timeEntries, this._handler);
-        this.breaktimeHandler = new BreaktimeHandler(this._options.breaks, this._timeEntries, this._handler);
-        this.timeEntryWatcher = new TimeEntryWatcher(this._timeEntries, this._handler);
-
-        this._handler.notificationHandler = this.notificationHandler;
-        this._handler.worktimeHandler = this.worktimeHandler;
-        this._handler.breaktimeHandler = this.breaktimeHandler;
-        this._handler.timeEntryWatcher = this.timeEntryWatcher;
-
-        this._mainLoopHandlers.push(this.timeEntryWatcher, this.worktimeHandler, this.breaktimeHandler, this.notificationHandler);
+    configure() {
+        this.addHandler(
+            'notificationHandler',
+            new NotificationHandler(
+                this._options.notifications,
+                this._timeEntries,
+                this._handler
+            ),
+            true,
+            true
+        );
+        this.addHandler(
+            'worktimeHandler',
+            new WorktimeHandler(
+                this._options.hours,
+                this._timeEntries,
+                this._handler
+            ),
+            true,
+            true,
+            true
+        );
+        this.addHandler(
+            'breaktimeHandler',
+            new BreaktimeHandler(
+                this._options.breaks,
+                this._timeEntries,
+                this._handler
+            ),
+            true,
+            true
+        );
+        this.addHandler(
+            'timeEntryWatcher',
+            new TimeEntryWatcher(
+                this._timeEntries,
+                this._handler
+            ),
+            true,
+            true
+        );
     }
 
-    appendHtml() {
-        for (let i = 0; this._mainLoopHandlers.length > i; i++) {
-            let handler = this._mainLoopHandlers[i];
+    addHandler(
+        name,
+        handler,
+        isMainLoopHandler = false,
+        crossHandleAccessAllowed = true,
+        appendHtml = false
+    ) {
+        this[name] = handler;
 
+        if (appendHtml) {
             this._menuBarHtml += handler.getHtml();
         }
 
+        if (isMainLoopHandler) {
+            this._mainLoopHandlers.push(handler);
+        }
+
+        if (crossHandleAccessAllowed) {
+            this._handler[name] = this[name];
+        }
+    }
+
+    appendHtml() {
         let menuBar = parent.document.getElementById('list_actions');
 
         menuBar.insertAdjacentHTML("beforeend", this._menuBarHtml);
