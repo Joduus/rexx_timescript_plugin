@@ -47,7 +47,8 @@ class TimeManagement {
                 this._handler
             ),
             true,
-            true
+            true,
+            false
         );
         this.addHandler(
             'worktimeHandler',
@@ -68,7 +69,8 @@ class TimeManagement {
                 this._handler
             ),
             true,
-            true
+            true,
+            false
         );
         this.addHandler(
             'timeEntryWatcher',
@@ -77,7 +79,8 @@ class TimeManagement {
                 this._handler
             ),
             true,
-            true
+            true,
+            false
         );
     }
 
@@ -115,9 +118,9 @@ class TimeManagement {
         }
 
         setInterval(() => {
+            let currentTime = new Date();
             for (let i = 0; this._mainLoopHandlers.length > i; i++) {
                 let handler = this._mainLoopHandlers[i];
-                let currentTime = new Date();
 
                 handler.run(currentTime);
             }

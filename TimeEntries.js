@@ -13,6 +13,10 @@ class TimeEntries {
      */
     _timeEntries = [];
 
+    static come = 'Kommen';
+
+    static go = 'Gehen';
+
     constructor() {
         this.getTodayTimeEntries();
     }
