@@ -1,26 +1,15 @@
-class WorktimeHandler {
+class WorktimeHandler extends Module {
     _domIds = {
         worktime: 'nav_infotxt_worktime'
     };
-
-    /*
-     * class Timemanagement
-     */
-    _handler;
 
     /*
      * class NotificationHandler
      */
     _notificationHandler;
 
-    /*
-     * class TimeEntries
-     */
-    _timeEntries;
-
+    _options;
     _hourData;
-
-    _currentTime;
 
     _paused = false;
 
@@ -30,15 +19,17 @@ class WorktimeHandler {
         seconds: 0
     };
 
-    constructor(hourData, timeEntries, handler) {
-        this._hourData = hourData;
+    constructor(options, timeEntries, handler) {
+        super();
+        this._options = options;
+        this._hourData = this._options.hours;
         this._timeEntries = timeEntries;
         this._handler = handler;
         this._notificationHandler = this._handler.notificationHandler;
     }
 
     run(currentTime) {
-        this._currentTime = currentTime;
+        super.run(currentTime);
 
         this.updateWorktime();
 

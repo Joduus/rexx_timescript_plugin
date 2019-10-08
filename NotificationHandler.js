@@ -1,18 +1,13 @@
-class NotificationHandler {
+class NotificationHandler extends Module {
     _options;
-
-    /*
-     * class timemanagement
-     */
-    _handler;
-
-    _timeEntries;
+    notificationOptions;
 
     _notificationQueue = [];
 
     _permissionGranted = false;
 
     constructor(options, timeEntries, handler) {
+        super();
         Notification.requestPermission().then((result) => {
             if (result === 'denied') {
                 console.log('Permission wasn\'t granted. Allow a retry.');
@@ -25,11 +20,13 @@ class NotificationHandler {
         });
 
         this._options = options;
+        this.notificationOptions = this._options.notifications;
         this._handler = handler;
         this._timeEntries = timeEntries;
     }
 
     run(currentTime) {
+        super.run(currentTime);
     }
 
     getHtml = () => '';

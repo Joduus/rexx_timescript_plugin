@@ -1,26 +1,20 @@
-class BreaktimeHandler {
+class BreaktimeHandler extends Module {
     _notificationHandler;
 
-    _timeEntries;
-
     _options;
-
-    /*
-     * class timemanagement
-     */
-    _handler;
-
-    _currentTime;
+    _breakData;
 
     constructor(options, timeEntries,  handler) {
+        super();
         this._options = options;
+        this._breakData = this._options.breaks;
         this._handler = handler;
         this._timeEntries = timeEntries;
         this._notificationHandler = this._handler.notificationHandler;
     }
 
     run(currentTime) {
-        this._currentTime = currentTime;
+        super.run(currentTime);
     }
 
     getHtml = () => '';

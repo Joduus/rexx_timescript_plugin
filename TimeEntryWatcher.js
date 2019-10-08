@@ -1,20 +1,15 @@
-class TimeEntryWatcher {
-    /*
-     * class timemanagement
-     */
-    _handler;
+class TimeEntryWatcher extends Module {
+    _options;
 
-    _timeEntries;
-
-    _currentTime;
-
-    constructor(timeEntries, handler) {
+    constructor(options, timeEntries, handler) {
+        super();
+        this._options = options;
         this._timeEntries = timeEntries;
         this._handler = handler;
     }
 
     run(currentTime) {
-        this._currentTime = currentTime;
+        super.run(currentTime);
     }
 
     getHtml = () => '';

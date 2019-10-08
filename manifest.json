@@ -16,6 +16,8 @@
       "run_at": "document_idle",
       "all_frames": true,
       "js": [
+        "Module.js",
+        "ModuleCollection.js",
         "TimeEntries.js",
         "TimeEntryWatcher.js",
         "NotificationHandler.js",

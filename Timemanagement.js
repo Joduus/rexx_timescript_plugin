@@ -5,24 +5,14 @@ class TimeManagement {
     _options;
 
     /*
-    Holds all Handlers for the main loop defined in configure
-     */
-    _mainLoopHandlers = [];
-
-    /*
-     * Holds all handlers with crossHandlerAccess
-     */
-    _handler = {};
-
-    /*
     Holds timeEntries Object
      */
     _timeEntries;
 
     /*
-    Html for the view
+    class ModuleCollection
      */
-    _menuBarHtml = '';
+    _moduleCollection;
 
     constructor(options) {
         this._options = options;
@@ -33,97 +23,74 @@ class TimeManagement {
             return
         }
 
+        this._moduleCollection = new ModuleCollection();
+
         this.configure();
 
         this.appendHtml();
     }
 
     configure() {
-        this.addHandler(
+        this._moduleCollection.addModule(
             'notificationHandler',
             new NotificationHandler(
-                this._options.notifications,
+                this._options,
                 this._timeEntries,
-                this._handler
+                this._moduleCollection.crossHandleModules
             ),
             true,
             true,
             false
         );
-        this.addHandler(
+        this._moduleCollection.addModule(
             'worktimeHandler',
             new WorktimeHandler(
-                this._options.hours,
+                this._options,
                 this._timeEntries,
-                this._handler
+                this._moduleCollection.crossHandleModules
             ),
             true,
             true,
             true
         );
-        this.addHandler(
+        this._moduleCollection.addModule(
             'breaktimeHandler',
             new BreaktimeHandler(
-                this._options.breaks,
+                this._options,
                 this._timeEntries,
-                this._handler
+                this._moduleCollection.crossHandleModules
             ),
             true,
             true,
             false
         );
-        this.addHandler(
+        this._moduleCollection.addModule(
             'timeEntryWatcher',
             new TimeEntryWatcher(
+                this._options,
                 this._timeEntries,
-                this._handler
+                this._moduleCollection.crossHandleModules
             ),
             true,
             true,
             false
         );
-    }
-
-    addHandler(
-        name,
-        handler,
-        isMainLoopHandler = false,
-        crossHandleAccessAllowed = true,
-        appendHtml = false
-    ) {
-        this[name] = handler;
-
-        if (appendHtml) {
-            this._menuBarHtml += handler.getHtml();
-        }
-
-        if (isMainLoopHandler) {
-            this._mainLoopHandlers.push(handler);
-        }
-
-        if (crossHandleAccessAllowed) {
-            this._handler[name] = this[name];
-        }
     }
 
     appendHtml() {
         let menuBar = parent.document.getElementById('list_actions');
 
-        menuBar.insertAdjacentHTML("beforeend", this._menuBarHtml);
+        menuBar.insertAdjacentHTML("beforeend", this._moduleCollection.moduleHtml);
     }
 
     run() {
-        if (Object.keys(this._mainLoopHandlers).length === 0) {
+        if (this._moduleCollection.noMainLoopModules) {
             return;
         }
 
         setInterval(() => {
             let currentTime = new Date();
-            for (let i = 0; this._mainLoopHandlers.length > i; i++) {
-                let handler = this._mainLoopHandlers[i];
-
-                handler.run(currentTime);
-            }
+            this._moduleCollection.run(currentTime);
         }, 1000);
     }
 }
