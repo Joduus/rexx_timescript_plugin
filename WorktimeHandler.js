@@ -53,12 +53,16 @@ class WorktimeHandler extends Module {
     updateText() {
         let element = parent.document.getElementById('nav_infotxt_worktime');
 
-        element.textContent =
+        let text =
             this.toDoubleDigit(this._worktime.hours)
             + ':' +
-            this.toDoubleDigit(this._worktime.minutes)
-            + ':' +
-            this.toDoubleDigit(this._worktime.seconds);
+            this.toDoubleDigit(this._worktime.minutes);
+
+        if (/*this._options.showSeconds*/true) {
+            text += ':' + this.toDoubleDigit(this._worktime.seconds);
+        }
+
+        element.textContent = text;
     }
 
     updateWorktime() {
