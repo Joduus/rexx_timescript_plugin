@@ -25,6 +25,14 @@ class TimeEntries {
         return this._timeEntries;
     }
 
+    /*
+    Sets new Values without creating new reference
+    @var timeEntries self
+     */
+    set timeEntries(timeEntries) {
+        this._timeEntries = timeEntries.timeEntries;
+    }
+
     get entryLength() {
         return this._timeEntries.length;
     }
