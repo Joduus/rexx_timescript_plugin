@@ -9,12 +9,10 @@ class WorktimeHandler extends TimeHandler {
     _notificationHandler;
 
     _options;
-    _hourData;
 
     constructor(options, timeEntries, handler) {
         super(timeEntries, handler);
         this._options = options;
-        this._hourData = this._options.hours;
         this._notificationHandler = this._handler.notificationHandler;
     }
 

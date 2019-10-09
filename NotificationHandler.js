@@ -1,6 +1,5 @@
 class NotificationHandler extends Module {
     _options;
-    notificationOptions;
 
     _notificationQueue = [];
 
@@ -20,7 +19,6 @@ class NotificationHandler extends Module {
         });
 
         this._options = options;
-        this.notificationOptions = this._options.notifications;
     }
 
     run(currentTime) {

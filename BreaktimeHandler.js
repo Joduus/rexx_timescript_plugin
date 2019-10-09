@@ -6,12 +6,10 @@ class BreaktimeHandler extends TimeHandler {
     _notificationHandler;
 
     _options;
-    _breakData;
 
     constructor(options, timeEntries,  handler) {
         super(timeEntries, handler);
         this._options = options;
-        this._breakData = this._options.breaks;
         this._notificationHandler = this._handler.notificationHandler;
     }
 
