@@ -3,6 +3,8 @@ class ModuleCollection {
 
     _crossHandleModules = {};
 
+    _htmlModules = [];
+
     _modules = {};
 
     _html = '';
@@ -21,7 +23,7 @@ class ModuleCollection {
         this._modules[name] = handler;
 
         if (appendHtml) {
-            this._html += handler.getHtml();
+            this._htmlModules.push(this._modules[name]);
         }
 
         if (isMainLoopHandler) {
@@ -38,7 +40,13 @@ class ModuleCollection {
     }
 
     get moduleHtml() {
-        return this._html;
+        let html = '';
+
+        for (let i = 0; i < this._htmlModules.length; i++) {
+            html += this._htmlModules[i].getHtml();
+        }
+
+        return html;
     }
 
     get noMainLoopModules() {
