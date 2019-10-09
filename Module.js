@@ -13,4 +13,8 @@ class Module {
     run(currentTime) {
         this._currentTime = currentTime;
     }
+
+    constructor(timeEntries) {
+        this._timeEntries = timeEntries;
+    }
 }

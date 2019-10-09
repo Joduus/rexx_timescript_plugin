@@ -18,6 +18,8 @@
       "js": [
         "Module.js",
         "ModuleCollection.js",
+        "TimeHandler.js",
+        "TimeCalculator.js",
         "TimeEntries.js",
         "TimeEntryWatcher.js",
         "NotificationHandler.js",

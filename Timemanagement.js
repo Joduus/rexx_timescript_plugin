@@ -62,7 +62,7 @@ class TimeManagement {
             ),
             true,
             true,
-            false
+            true
         );
         this._moduleCollection.addModule(
             'timeEntryWatcher',
