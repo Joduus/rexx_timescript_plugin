@@ -12,10 +12,9 @@ class WorktimeHandler extends TimeHandler {
     _hourData;
 
     constructor(options, timeEntries, handler) {
-        super(timeEntries);
+        super(timeEntries, handler);
         this._options = options;
         this._hourData = this._options.hours;
-        this._handler = handler;
         this._notificationHandler = this._handler.notificationHandler;
     }
 
@@ -34,13 +33,13 @@ class WorktimeHandler extends TimeHandler {
     </a>
 </li>
 <li class="navbar_txt noUserSelect">
-    <a title="Arbeitszeit heute" id="nav_infotxt_worktime">
+    <a title="Arbeitszeit heute" id="${this._domIds.worktime}">
     </a>
 </li>
 `;
 
     updateText() {
-        let element = parent.document.getElementById('nav_infotxt_worktime');
+        let element = parent.document.getElementById(this._domIds.worktime);
 
         let text =
             TimeCalculator.toDoubleDigit(this._time.hours)

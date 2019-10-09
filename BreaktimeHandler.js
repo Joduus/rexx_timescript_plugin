@@ -1,14 +1,17 @@
 class BreaktimeHandler extends TimeHandler {
+    _domIds = {
+        breaktime: 'nav_infotxt_breaktime'
+    };
+
     _notificationHandler;
 
     _options;
     _breakData;
 
     constructor(options, timeEntries,  handler) {
-        super(timeEntries);
+        super(timeEntries, handler);
         this._options = options;
         this._breakData = this._options.breaks;
-        this._handler = handler;
         this._notificationHandler = this._handler.notificationHandler;
     }
 
@@ -27,13 +30,13 @@ class BreaktimeHandler extends TimeHandler {
     </a>
 </li>
 <li class="navbar_txt noUserSelect">
-    <a title="Pausenzeit heute" id="nav_infotxt_breaktime">
+    <a title="Pausenzeit heute" id="${this._domIds.breaktime}">
     </a>
 </li>
 `;
 
     updateText() {
-        let element = parent.document.getElementById('nav_infotxt_breaktime');
+        let element = parent.document.getElementById(this._domIds.breaktime);
 
         let text =
             TimeCalculator.toDoubleDigit(this._time.hours)

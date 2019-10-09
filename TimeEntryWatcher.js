@@ -2,9 +2,8 @@ class TimeEntryWatcher extends Module {
     _options;
 
     constructor(options, timeEntries, handler) {
-        super(timeEntries);
+        super(timeEntries, handler);
         this._options = options;
-        this._handler = handler;
     }
 
     run(currentTime) {

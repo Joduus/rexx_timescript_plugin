@@ -5,10 +5,6 @@ class TimeHandler extends Module {
         seconds: 0
     };
 
-    constructor(timeEntries) {
-        super(timeEntries);
-    }
-
     getTimeDifferences(state = TimeEntries.come) {
         let timeTimes = [];
         for(let i = 0; i < this._timeEntries.entryLength; i += 2) {
