@@ -25,6 +25,10 @@
         "NotificationHandler.js",
         "WorktimeHandler.js",
         "BreaktimeHandler.js",
+        "WorktimeLeftHandler.js",
+        "BreaktimeLeftHandler.js",
+        "WorktimeNotificator.js",
+        "BreaktimeNotificator.js",
         "Timemanagement.js",
         "Options.js",
         "contentScript.js"
