@@ -1,5 +1,4 @@
 class NotificationHandler extends Module {
-
     _notificationQueue = [];
 
     _permissionGranted = false;
@@ -20,7 +19,34 @@ class NotificationHandler extends Module {
 
     run(currentTime) {
         super.run(currentTime);
+
+        this.sendNotifications();
     }
 
     getHtml = () => '';
+
+    addNotification(title, body) {
+        let notificationObject = {
+            title: title,
+            options: {
+                body: body
+            }
+        };
+
+        this._notificationQueue.push(notificationObject);
+    }
+
+    sendNotifications() {
+        if (!this._permissionGranted) {
+            return; // No permission to send Notifications
+        }
+
+        let notification;
+        while (
+            (notification = this._notificationQueue.shift()
+            ) !== undefined
+        ) {
+            new Notification(notification.title, notification.options);
+        }
+    }
 }
