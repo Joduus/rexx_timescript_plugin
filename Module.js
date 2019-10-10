@@ -1,6 +1,8 @@
 class Module {
     _handler;
 
+    _options;
+
     /*
      * class TimeEntries
      */
@@ -14,7 +16,8 @@ class Module {
         this._currentTime = currentTime;
     }
 
-    constructor(timeEntries, handler) {
+    constructor(options, timeEntries, handler) {
+        this._options = options;
         this._timeEntries = timeEntries;
         this._handler = handler;
     }

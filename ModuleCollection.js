@@ -7,8 +7,6 @@ class ModuleCollection {
 
     _modules = {};
 
-    _html = '';
-
     constructor() {
 
     }
@@ -49,7 +47,7 @@ class ModuleCollection {
         return html;
     }
 
-    get noMainLoopModules() {
+    get hasNoMainLoopModules() {
         return Object.keys(this._mainLoopModules).length === 0;
     }
 

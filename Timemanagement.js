@@ -84,7 +84,7 @@ class TimeManagement {
     }
 
     run() {
-        if (this._moduleCollection.noMainLoopModules) {
+        if (this._moduleCollection.hasNoMainLoopModules) {
             return;
         }
 
