@@ -14,9 +14,9 @@ class ModuleCollection {
     addModule(
         name,
         handler,
-        isMainLoopHandler = false,
-        crossHandleAccessAllowed = true,
-        appendHtml = false
+        appendHtml = false,
+        isMainLoopHandler = true,
+        crossHandleAccessAllowed = true
     ) {
         this._modules[name] = handler;
 

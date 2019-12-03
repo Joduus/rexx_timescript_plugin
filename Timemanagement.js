@@ -32,15 +32,12 @@ class TimeManagement {
 
     configure() {
         this._moduleCollection.addModule(
-            'notificationHandler',
-            new NotificationHandler(
+            'timeEntryWatcher',
+            new TimeEntryWatcher(
                 this._options,
                 this._timeEntries,
                 this._moduleCollection.crossHandleModules
-            ),
-            true,
-            true,
-            false
+            )
         );
         this._moduleCollection.addModule(
             'worktimeHandler',
@@ -49,8 +46,15 @@ class TimeManagement {
                 this._timeEntries,
                 this._moduleCollection.crossHandleModules
             ),
-            true,
-            true,
+            true
+        );
+        this._moduleCollection.addModule(
+            'worktimeLeftHandler',
+            new WorktimeLeftHandler(
+                this._options,
+                this._timeEntries,
+                this._moduleCollection.crossHandleModules
+            ),
             true
         );
         this._moduleCollection.addModule(
@@ -60,20 +64,44 @@ class TimeManagement {
                 this._timeEntries,
                 this._moduleCollection.crossHandleModules
             ),
-            true,
-            true,
             true
         );
         this._moduleCollection.addModule(
-            'timeEntryWatcher',
-            new TimeEntryWatcher(
+            'breaktimeLeftHandler',
+            new BreaktimeLeftHandler(
                 this._options,
                 this._timeEntries,
                 this._moduleCollection.crossHandleModules
             ),
-            true,
-            true,
+            true
+        );
+        this._moduleCollection.addModule(
+            'worktimeNotificator',
+            new WorktimeNotificator(
+                this._options,
+                this._timeEntries,
+                this._moduleCollection.crossHandleModules
+            ),
+            false,
             false
+        );
+        this._moduleCollection.addModule(
+            'breaktimeNotificator',
+            new BreaktimeNotificator(
+                this._options,
+                this._timeEntries,
+                this._moduleCollection.crossHandleModules
+            ),
+            false,
+            false
+        );
+        this._moduleCollection.addModule(
+            'notificationHandler',
+            new NotificationHandler(
+                this._options,
+                this._timeEntries,
+                this._moduleCollection.crossHandleModules
+            )
         );
     }
 
@@ -92,5 +120,7 @@ class TimeManagement {
             let currentTime = new Date();
             this._moduleCollection.run(currentTime);
         }, 1000);
+
+        this._moduleCollection.run(new Date());
     }
 }
