@@ -9,8 +9,6 @@ class TimeEntryWatcher extends Module {
         this.checkForNewTimeEntries();
     }
 
-    getHtml = () => '';
-
     checkForNewTimeEntries() {
         let currentTimeEntriesLength = this._timeEntries.entryLength;
         let newTimeEntries = new TimeEntries();

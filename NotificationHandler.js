@@ -23,8 +23,6 @@ class NotificationHandler extends Module {
         this.sendNotifications();
     }
 
-    getHtml = () => '';
-
     addNotification(title, body) {
         let notificationObject = {
             title: title,
