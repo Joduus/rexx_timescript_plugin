@@ -78,11 +78,9 @@ class WorktimeLeftHandler extends TimeHandler {
                 text += ':' + TimeCalculator.toDoubleDigit(this._time.seconds);
             }
         } else {
-            parent.document.getElementById(this._domIds.worktimeLeftString).style.display = 'none';
             text = 'Kein Zeitstempel übrig';
         }
 
         element.textContent = text;
     }
-
 }
