@@ -44,7 +44,7 @@ class WorktimeLeftHandler extends TimeHandler {
         this.resetTimeObject();
 
         let firstNotReachedTime = -1;
-        for (let i = 0; i < this._workHourTimes; i++) {
+        for (let i = 0; i < this._workHourTimes.length; i++) {
             if (this._worktime < this._workHourTimes[i]) {
                 firstNotReachedTime = this._workHourTimes[i];
                 break;

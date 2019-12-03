@@ -3,6 +3,8 @@ class BreaktimeHandler extends TimeHandler {
         breaktime: 'nav_infotxt_breaktime'
     };
 
+    _breakTime;
+
     _notificationHandler;
 
     constructor(options, timeEntries,  handler) {
@@ -30,6 +32,10 @@ class BreaktimeHandler extends TimeHandler {
 </li>
 `;
 
+    get breaktime() {
+        return this._breakTime;
+    }
+
     updateBreakTime() {
         this.resetTimeObject();
 
@@ -37,6 +43,9 @@ class BreaktimeHandler extends TimeHandler {
         for (let i = 0; i < timeTimes.length; i++) {
             this.assignRealTime(timeTimes[i]);
         }
+
+        // To json for no ref
+        this._breakTime = TimeCalculator.calculateTime(JSON.parse(JSON.stringify(this._time)));
     }
 
     updateText() {
