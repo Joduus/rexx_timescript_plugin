@@ -36,6 +36,7 @@ class NotificationHandler extends Module {
 
     sendNotifications() {
         if (!this._permissionGranted) {
+            console.warn("We tried to send a notification, please allow notifications on this page");
             return; // No permission to send Notifications
         }
 
