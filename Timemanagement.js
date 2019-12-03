@@ -32,7 +32,7 @@ class TimeManagement {
 
     configure() {
         this._moduleCollection.addModule(
-            'timeEntryWatcher',
+            'timeEntryWatcher', // Sees login/logout and new entries
             new TimeEntryWatcher(
                 this._options,
                 this._timeEntries,
@@ -40,7 +40,7 @@ class TimeManagement {
             )
         );
         this._moduleCollection.addModule(
-            'worktimeHandler',
+            'worktimeHandler', // Knows how much you have worked today
             new WorktimeHandler(
                 this._options,
                 this._timeEntries,
@@ -49,7 +49,7 @@ class TimeManagement {
             true
         );
         this._moduleCollection.addModule(
-            'worktimeLeftHandler',
+            'worktimeLeftHandler', // Knows how much time you have left to work for today
             new WorktimeLeftHandler(
                 this._options,
                 this._timeEntries,
@@ -58,7 +58,7 @@ class TimeManagement {
             true
         );
         this._moduleCollection.addModule(
-            'breaktimeHandler',
+            'breaktimeHandler', // Knows how long your break was today
             new BreaktimeHandler(
                 this._options,
                 this._timeEntries,
@@ -67,7 +67,7 @@ class TimeManagement {
             true
         );
         this._moduleCollection.addModule(
-            'breaktimeLeftHandler',
+            'breaktimeLeftHandler', // Knows the minimum time left for your break
             new BreaktimeLeftHandler(
                 this._options,
                 this._timeEntries,
@@ -76,7 +76,7 @@ class TimeManagement {
             true
         );
         this._moduleCollection.addModule(
-            'worktimeNotificator',
+            'worktimeNotificator', // Test your worktime for reasons to notify you
             new WorktimeNotificator(
                 this._options,
                 this._timeEntries,
@@ -86,7 +86,7 @@ class TimeManagement {
             false
         );
         this._moduleCollection.addModule(
-            'breaktimeNotificator',
+            'breaktimeNotificator', // Test your breaktime for reasons to notify you
             new BreaktimeNotificator(
                 this._options,
                 this._timeEntries,
@@ -96,7 +96,7 @@ class TimeManagement {
             false
         );
         this._moduleCollection.addModule(
-            'notificationHandler',
+            'notificationHandler', // Notifies you
             new NotificationHandler(
                 this._options,
                 this._timeEntries,
