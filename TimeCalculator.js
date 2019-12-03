@@ -3,6 +3,13 @@ class TimeCalculator {
         return second - first;
     }
 
+    static calculateTime(time) {
+        time.minutes += time.hours * 60;
+        time.seconds += time.minutes * 60;
+
+        return time.seconds;
+    }
+
     static calculateRealTime(mSec) {
         let times = {
             hours: 0,

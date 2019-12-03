@@ -3,6 +3,8 @@ class WorktimeHandler extends TimeHandler {
         worktime: 'nav_infotxt_worktime'
     };
 
+    _worktime;
+
     /*
      * class NotificationHandler
      */
@@ -53,5 +55,8 @@ class WorktimeHandler extends TimeHandler {
 
         let timeTimes = this.getTimeDifferences(TimeEntries.come);
         this.assignRealTime(timeTimes);
+
+        // To json for no ref
+        this._worktime = TimeCalculator.calculateTime(JSON.parse(JSON.stringify(this._time)));
     }
 }
