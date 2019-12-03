@@ -35,6 +35,22 @@ class WorktimeHandler extends TimeHandler {
 </li>
 `;
 
+    get worktime() {
+        return this._worktime;
+    }
+
+    updateWorktime() {
+        this.resetTimeObject();
+
+        let timeTimes = this.getTimeDifferences(TimeEntries.come);
+        for (let i = 0; i < timeTimes.length; i++) {
+            this.assignRealTime(timeTimes[i]);
+        }
+
+        // To json for no ref
+        this._worktime = TimeCalculator.calculateTime(JSON.parse(JSON.stringify(this._time)));
+    }
+
     updateText() {
         let element = parent.document.getElementById(this._domIds.worktime);
 
@@ -43,20 +59,10 @@ class WorktimeHandler extends TimeHandler {
             + ':' +
             TimeCalculator.toDoubleDigit(this._time.minutes);
 
-        if (/*this._options.showSeconds*/true) {
+        if (/*this._options.worktime.showSeconds*/true) {
             text += ':' + TimeCalculator.toDoubleDigit(this._time.seconds);
         }
 
         element.textContent = text;
-    }
-
-    updateWorktime() {
-        this.resetTimeObject();
-
-        let timeTimes = this.getTimeDifferences(TimeEntries.come);
-        this.assignRealTime(timeTimes);
-
-        // To json for no ref
-        this._worktime = TimeCalculator.calculateTime(JSON.parse(JSON.stringify(this._time)));
     }
 }

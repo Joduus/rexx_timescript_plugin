@@ -24,7 +24,7 @@ class TimeHandler extends Module {
 
             let difference = TimeCalculator.calculateTimeDifference(fromTime, toTime);
 
-            let times = TimeCalculator.calculateRealTime(difference);
+            let times = TimeCalculator.calculateRealTime(difference / 1000);
 
             timeTimes.push(times);
         }
@@ -32,12 +32,10 @@ class TimeHandler extends Module {
         return timeTimes;
     }
 
-    assignRealTime(timeTimes) {
-        for (let i = 0; i < timeTimes.length; i++) {
-            this._time.hours += timeTimes[i].hours;
-            this._time.minutes += timeTimes[i].minutes;
-            this._time.seconds += timeTimes[i].seconds;
-        }
+    assignRealTime(time) {
+        this._time.hours += time.hours;
+        this._time.minutes += time.minutes;
+        this._time.seconds += time.seconds;
 
         TimeCalculator.roundTime(this._time);
     }

@@ -10,7 +10,7 @@ class TimeCalculator {
         return time.seconds;
     }
 
-    static calculateRealTime(mSec) {
+    static calculateRealTime(sec) {
         let times = {
             hours: 0,
             minutes: 0,
@@ -18,14 +18,14 @@ class TimeCalculator {
         };
 
         // Hours
-        times.hours = Math.floor(mSec / 1000 / 60 / 60);
-        mSec -= times.hours * 1000 * 60 * 60;
+        times.hours = Math.floor(sec / 60 / 60);
+        sec -= times.hours * 60 * 60;
         // Minutes
-        times.minutes = Math.floor(mSec / 1000 / 60);
-        mSec -= times.minutes * 1000 * 60;
+        times.minutes = Math.floor(sec / 60);
+        sec -= times.minutes * 60;
         // Seconds
-        times.seconds = Math.floor(mSec / 1000);
-        mSec -= times.seconds * 1000;
+        times.seconds = Math.floor(sec);
+        sec -= times.seconds;
 
         return times;
     }
@@ -52,5 +52,9 @@ class TimeCalculator {
         }
 
         return '0' + value;
+    }
+
+    static getDifference(start, end) {
+        return end - start;
     }
 }

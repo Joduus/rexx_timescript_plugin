@@ -30,6 +30,15 @@ class BreaktimeHandler extends TimeHandler {
 </li>
 `;
 
+    updateBreakTime() {
+        this.resetTimeObject();
+
+        let timeTimes = this.getTimeDifferences(TimeEntries.go);
+        for (let i = 0; i < timeTimes.length; i++) {
+            this.assignRealTime(timeTimes[i]);
+        }
+    }
+
     updateText() {
         let element = parent.document.getElementById(this._domIds.breaktime);
 
@@ -38,17 +47,10 @@ class BreaktimeHandler extends TimeHandler {
             + ':' +
             TimeCalculator.toDoubleDigit(this._time.minutes);
 
-        if (/*this._options.showSeconds*/false) {
+        if (/*this._options.breaktime.showSeconds*/false) {
             text += ':' + TimeCalculator.toDoubleDigit(this._time.seconds);
         }
 
         element.textContent = text;
-    }
-
-    updateBreakTime() {
-        this.resetTimeObject();
-
-        let timeTimes = this.getTimeDifferences(TimeEntries.go);
-        this.assignRealTime(timeTimes);
     }
 }
