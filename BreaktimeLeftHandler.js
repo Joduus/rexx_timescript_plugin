@@ -21,8 +21,8 @@ class BreaktimeLeftHandler extends TimeHandler {
     _breaktimeReached = false;
     _isPerfectInTime = false;
 
-    constructor(options, timeEntries, handler) {
-        super(options, timeEntries, handler);
+    constructor(handler) {
+        super(handler);
     }
 
     run(currentTime) {

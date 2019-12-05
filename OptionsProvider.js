@@ -1,0 +1,3 @@
+class OptionsProvider extends Module {
+
+}

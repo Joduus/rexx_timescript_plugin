@@ -31,19 +31,45 @@ class TimeManagement {
     }
 
     configure() {
+        this.addProvider();
+        this.addWatcher();
+        this.addHandler();
+        this.addNotifier();
+    }
+
+    addProvider() {
+        this._moduleCollection.addModule(
+            'optionsProvider', // Holds Options
+            new OptionsProvider(
+                this._options
+            ),
+            false,
+            false
+        );
+        this._moduleCollection.addModule(
+            'timeEntryProvider',
+            new TimeEntryProvider(
+                this._moduleCollection.crossHandleModules,
+                this._timeEntries
+            ),
+            false,
+            false
+        )
+    }
+
+    addWatcher() {
         this._moduleCollection.addModule(
             'timeEntryWatcher', // Sees login/logout and new entries
             new TimeEntryWatcher(
-                this._options,
-                this._timeEntries,
                 this._moduleCollection.crossHandleModules
             )
         );
+    }
+
+    addHandler() {
         this._moduleCollection.addModule(
             'worktimeHandler', // Knows how much you have worked today
             new WorktimeHandler(
-                this._options,
-                this._timeEntries,
                 this._moduleCollection.crossHandleModules
             ),
             true
@@ -51,8 +77,6 @@ class TimeManagement {
         this._moduleCollection.addModule(
             'worktimeLeftHandler', // Knows how much time you have left to work for today
             new WorktimeLeftHandler(
-                this._options,
-                this._timeEntries,
                 this._moduleCollection.crossHandleModules
             ),
             true
@@ -60,8 +84,6 @@ class TimeManagement {
         this._moduleCollection.addModule(
             'breaktimeHandler', // Knows how long your break was today
             new BreaktimeHandler(
-                this._options,
-                this._timeEntries,
                 this._moduleCollection.crossHandleModules
             ),
             true
@@ -69,17 +91,16 @@ class TimeManagement {
         this._moduleCollection.addModule(
             'breaktimeLeftHandler', // Knows the minimum time left for your break
             new BreaktimeLeftHandler(
-                this._options,
-                this._timeEntries,
                 this._moduleCollection.crossHandleModules
             ),
             true
         );
+    }
+
+    addNotifier() {
         this._moduleCollection.addModule(
             'worktimeNotificator', // Test your worktime for reasons to notify you
             new WorktimeNotificator(
-                this._options,
-                this._timeEntries,
                 this._moduleCollection.crossHandleModules
             ),
             false,
@@ -88,8 +109,6 @@ class TimeManagement {
         this._moduleCollection.addModule(
             'breaktimeNotificator', // Test your breaktime for reasons to notify you
             new BreaktimeNotificator(
-                this._options,
-                this._timeEntries,
                 this._moduleCollection.crossHandleModules
             ),
             false,
@@ -98,12 +117,11 @@ class TimeManagement {
         this._moduleCollection.addModule(
             'notificationHandler', // Notifies you
             new NotificationHandler(
-                this._options,
-                this._timeEntries,
                 this._moduleCollection.crossHandleModules
             )
         );
     }
+
 
     appendHtml() {
         let menuBar = parent.document.getElementById('list_actions');

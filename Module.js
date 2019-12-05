@@ -1,13 +1,6 @@
 class Module {
     _handler;
 
-    _options;
-
-    /*
-     * class TimeEntries
-     */
-    _timeEntries;
-
     _currentTime;
 
     getHtml = () => '';
@@ -16,9 +9,7 @@ class Module {
         this._currentTime = currentTime;
     }
 
-    constructor(options, timeEntries, handler) {
-        this._options = options;
-        this._timeEntries = timeEntries;
+    constructor(handler) {
         this._handler = handler;
     }
 }

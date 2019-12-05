@@ -1,6 +1,6 @@
 class TimeEntryWatcher extends Module {
-    constructor(options, timeEntries, handler) {
-        super(options, timeEntries, handler);
+    constructor(handler) {
+        super(handler);
     }
 
     run(currentTime) {
@@ -10,13 +10,14 @@ class TimeEntryWatcher extends Module {
     }
 
     checkForNewTimeEntries() {
-        let currentTimeEntriesLength = this._timeEntries.entryLength;
+        let timeEntryProvider = this._handler.timeEntryProvider;
+        let currentTimeEntriesLength = timeEntryProvider.module.entryLength;
         let newTimeEntries = new TimeEntries();
 
         if (currentTimeEntriesLength === newTimeEntries.entryLength) {
             return; // No new entries
         }
 
-        this._timeEntries.timeEntries = newTimeEntries;
+        timeEntryProvider.timeEntries = newTimeEntries;
     }
 }

@@ -31,6 +31,8 @@
         "BreaktimeNotificator.js",
         "Timemanagement.js",
         "Options.js",
+        "OptionsProvider.js",
+        "TimeEntryProvider.js",
         "contentScript.js"
       ]
     }

@@ -3,8 +3,9 @@ class NotificationHandler extends Module {
 
     _permissionGranted = false;
 
-    constructor(options, timeEntries, handler) {
-        super(options, timeEntries, handler);
+    constructor(handler) {
+        super(handler);
+
         Notification.requestPermission().then((result) => {
             if (result === 'denied') {
                 console.log('Permission wasn\'t granted. Allow a retry.');

@@ -6,20 +6,21 @@ class TimeHandler extends Module {
     };
 
     getTimeDifferences(state = TimeEntries.come) {
+        let timeEntryProvider = this._handler.timeEntryProvider;
         let timeTimes = [];
-        for(let i = 0; i < this._timeEntries.entryLength; i += 2) {
-            while (this._timeEntries.timeEntries[i] && this._timeEntries.timeEntries[i].state !== state) {
+        for(let i = 0; i < timeEntryProvider.module.entryLength; i += 2) {
+            while (timeEntryProvider.timeEntries[i] && timeEntryProvider.timeEntries[i].state !== state) {
                 i++;
             }
 
-            if (!this._timeEntries.timeEntries[i]) {
+            if (!timeEntryProvider.timeEntries[i]) {
                 break;
             }
 
-            let fromTime = this._timeEntries.timeEntries[i].time;
+            let fromTime = timeEntryProvider.timeEntries[i].time;
             let toTime =
-                this._timeEntries.timeEntries[i + 1]
-                    ? this._timeEntries.timeEntries[i + 1].time
+                timeEntryProvider.timeEntries[i + 1]
+                    ? timeEntryProvider.timeEntries[i + 1].time
                     : this._currentTime;
 
             let difference = TimeCalculator.calculateTimeDifference(fromTime, toTime);

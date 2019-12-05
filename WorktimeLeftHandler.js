@@ -12,8 +12,8 @@ class WorktimeLeftHandler extends TimeHandler {
 
     _worktimeReached = false;
 
-    constructor(options, timeEntries, handler) {
-        super(options, timeEntries, handler);
+    constructor(handler) {
+        super(handler);
     }
 
     run(currentTime) {
@@ -23,7 +23,7 @@ class WorktimeLeftHandler extends TimeHandler {
 
         this.updateText();
 
-        // Implement check for time left notifications
+        this.checkNotify();
     }
 
     getHtml = () => `
@@ -82,5 +82,9 @@ class WorktimeLeftHandler extends TimeHandler {
         }
 
         element.textContent = text;
+    }
+
+    checkNotify() {
+        let worktimeNotificator = this._handler.worktimeNotificator;
     }
 }
