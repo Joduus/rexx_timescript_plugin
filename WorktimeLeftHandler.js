@@ -4,13 +4,13 @@ class WorktimeLeftHandler extends TimeHandler {
         worktimeLeft: 'nav_infotxt_worktimeLeft'
     };
 
-    _allReached = false;
-
     _workHourTimes = [ // Set by the options only now hardcoded
         28800 // 8 Hours
     ];
 
     _worktime;
+
+    _worktimeReached = false;
 
     constructor(options, timeEntries, handler) {
         super(options, timeEntries, handler);
@@ -52,13 +52,15 @@ class WorktimeLeftHandler extends TimeHandler {
         }
 
         if (firstNotReachedTime === -1) {
-            this._allReached = true;
-            return;
-        } else {
-            this._allReached = false;
+            firstNotReachedTime = this._workHourTimes[this._workHourTimes.length - 1];
         }
 
         let timeDifference = TimeCalculator.getDifference(this._worktime, firstNotReachedTime);
+
+        if (timeDifference < 0) {
+            this._worktimeReached = true;
+            timeDifference = Math.abs(timeDifference);
+        }
 
         let timeObject = TimeCalculator.calculateRealTime(timeDifference);
         this.assignRealTime(timeObject);
@@ -68,17 +70,15 @@ class WorktimeLeftHandler extends TimeHandler {
         let element = parent.document.getElementById(this._domIds.worktimeLeft);
         let text = '';
 
-        if (!this._allReached) {
-            text =
-                TimeCalculator.toDoubleDigit(this._time.hours)
-                + ':' +
-                TimeCalculator.toDoubleDigit(this._time.minutes);
-
-            if (/*this._options.worktimeLeft.showSeconds*/true) {
-                text += ':' + TimeCalculator.toDoubleDigit(this._time.seconds);
-            }
-        } else {
-            text = 'Kein Zeitstempel übrig';
+        if (this._worktimeReached) {
+            text += '+';
+        }
+        text +=
+            TimeCalculator.toDoubleDigit(this._time.hours)
+            + ':' +
+            TimeCalculator.toDoubleDigit(this._time.minutes);
+        if (/*this._options.worktimeLeft.showSeconds*/true) {
+            text += ':' + TimeCalculator.toDoubleDigit(this._time.seconds);
         }
 
         element.textContent = text;
