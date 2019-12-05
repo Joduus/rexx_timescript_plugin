@@ -12,9 +12,6 @@ class WorktimeLeftHandler extends TimeHandler {
 
     _worktimeReached = false;
 
-    constructor(handler) {
-        super(handler);
-    }
 
     run(currentTime) {
         super.run(currentTime);

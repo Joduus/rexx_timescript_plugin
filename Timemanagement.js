@@ -41,6 +41,7 @@ class TimeManagement {
         this._moduleCollection.addModule(
             'optionsProvider', // Holds Options
             new OptionsProvider(
+                this._moduleCollection.crossHandleModules,
                 this._options
             ),
             false,

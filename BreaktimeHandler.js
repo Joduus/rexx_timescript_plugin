@@ -5,9 +5,6 @@ class BreaktimeHandler extends TimeHandler {
 
     _breakTime;
 
-    constructor(handler) {
-        super(handler);
-    }
 
     run(currentTime) {
         super.run(currentTime);

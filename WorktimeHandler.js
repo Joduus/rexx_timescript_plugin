@@ -5,16 +5,6 @@ class WorktimeHandler extends TimeHandler {
 
     _worktime;
 
-    /*
-     * class NotificationHandler
-     */
-    _notificationHandler;
-
-    constructor(handler) {
-        super(handler);
-
-        this._notificationHandler = this._handler.notificationHandler;
-    }
 
     run(currentTime) {
         super.run(currentTime);
