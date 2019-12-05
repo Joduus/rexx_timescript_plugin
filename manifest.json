@@ -3,7 +3,7 @@
   "version": "0.1",
   "description": "Das Timescript in Pluginform",
   "manifest_version": 2,
-  "permissions": ["activeTab","declarativeContent","storage"],
+  "permissions": ["activeTab","storage"],
   "icons": {
     "16": "images/icon16.png",
     "32": "images/icon32.png",
@@ -36,7 +36,6 @@
     }
   ],
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "scripts": ["background.js"]
   }
 }
