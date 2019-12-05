@@ -96,6 +96,12 @@ class TimeManagement {
             ),
             true
         );
+        this._moduleCollection.addModule(
+            'notificationHandler', // Notifies you
+            new NotificationHandler(
+                this._moduleCollection.crossHandleModules
+            )
+        );
     }
 
     addNotifier() {
@@ -114,12 +120,6 @@ class TimeManagement {
             ),
             false,
             false
-        );
-        this._moduleCollection.addModule(
-            'notificationHandler', // Notifies you
-            new NotificationHandler(
-                this._moduleCollection.crossHandleModules
-            )
         );
     }
 
