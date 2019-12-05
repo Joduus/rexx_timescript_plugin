@@ -47,11 +47,25 @@ class TimeCalculator {
     }
 
     static toDoubleDigit(value) {
-        if (value >= 10) {
-            return '' + value;
+        let negative = false;
+        let returnString;
+
+        if (value < 0) {
+            negative = true;
+            value = Math.abs(value);
         }
 
-        return '0' + value;
+        if (value >= 10) {
+            returnString = '' + value;
+        } else {
+            returnString = '0' + value;
+        }
+
+        if (negative) {
+            returnString = '-' + returnString;
+        }
+
+        return returnString;
     }
 
     static getDifference(start, end) {

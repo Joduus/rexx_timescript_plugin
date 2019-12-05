@@ -1,17 +1,27 @@
 class BreaktimeLeftHandler extends TimeHandler {
     _domIds = {
-        breaktimeLeftString: 'nav_infotxt_breaktimeLeft_string',
         breaktimeLeft: 'nav_infotxt_breaktimeLeft'
     };
 
     _allReached = false;
 
     _breakTimes = [ // Set by the options only now hardcoded
-        21600, // 6 Hours
-        32400  // 9 Hours
+        {
+            'afterTime': 21600, // 6 Hours
+            'howLong': 1800 // 30 Minutes
+        },
+        {
+            'afterTime': 32400, // 9 Hours
+            'howLong': 900 // 15 Minutes
+        }
     ];
 
+    _worktime;
+
     _breaktime;
+
+    _breaktimeReached = false;
+    _isPerfectInTime = false;
 
     constructor(options, timeEntries, handler) {
         super(options, timeEntries, handler);
@@ -28,25 +38,24 @@ class BreaktimeLeftHandler extends TimeHandler {
     }
 
     getHtml = () => `
-<li class="navbar_txt">
-    <a title="Pausenzeit übrig" id="${this._domIds.breaktimeLeftString}">
-        Pausenzeit übrig: 
-    </a>
-</li>
 <li class="navbar_txt noUserSelect">
-    <a title="Verbleibende Zeit" id="${this._domIds.breaktimeLeft}">
+    <a title="Verbleibende Pausenzeit" id="${this._domIds.breaktimeLeft}">
     </a>
 </li>
 `;
 
     updateBreakTimeLeft() {
+        this._worktime = this._handler.worktimeHandler.worktime;
         this._breaktime = this._handler.breaktimeHandler.breaktime;
 
         this.resetTimeObject();
 
+        let howLongTotal = 0;
         let firstNotReachedTime = -1;
         for (let i = 0; i < this._breakTimes.length; i++) {
-            if (this._breaktime < this._breakTimes[i]) {
+            howLongTotal += this._breakTimes[i].howLong;
+
+            if (this._worktime < this._breakTimes[i].afterTime) {
                 firstNotReachedTime = this._breakTimes[i];
                 break;
             }
@@ -59,8 +68,13 @@ class BreaktimeLeftHandler extends TimeHandler {
             this._allReached = false;
         }
 
-        let timeDifference = TimeCalculator.getDifference(this._breaktime, firstNotReachedTime);
+        let timeDifference = TimeCalculator.getDifference(this._breaktime, howLongTotal);
 
+        if (timeDifference < 1) {
+            this._breaktimeReached = true;
+            this._isPerfectInTime = timeDifference === 0;
+            timeDifference = Math.abs(timeDifference);
+        }
         let timeObject = TimeCalculator.calculateRealTime(timeDifference);
         this.assignRealTime(timeObject);
     }
@@ -70,7 +84,15 @@ class BreaktimeLeftHandler extends TimeHandler {
         let text = '';
 
         if (!this._allReached) {
-            text =
+            if (this._breaktimeReached) {
+                if (!this._isPerfectInTime) {
+                    text += '+';
+                }
+            } else {
+                text += '-';
+            }
+
+            text +=
                 TimeCalculator.toDoubleDigit(this._time.hours)
                 + ':' +
                 TimeCalculator.toDoubleDigit(this._time.minutes);
