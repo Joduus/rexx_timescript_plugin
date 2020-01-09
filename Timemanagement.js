@@ -125,9 +125,9 @@ class TimeManagement {
 
 
     appendHtml() {
-        let menuBar = parent.document.getElementById('list_actions');
+        let insertContainer = parent.document.getElementsByClassName('my_absences_stats_description_container times_overview_stats_description_container')[0];
 
-        menuBar.insertAdjacentHTML("beforeend", this._moduleCollection.moduleHtml);
+        insertContainer.insertAdjacentHTML("beforeend", this._moduleCollection.moduleHtml);
     }
 
     run() {

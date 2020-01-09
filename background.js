@@ -5,7 +5,7 @@ chrome.runtime.onInstalled.addListener(function() {
                 new chrome.declarativeContent.PageStateMatcher({
                     pageUrl: {
                         hostContains: 'hrbox',
-                        pathContains: 'calendar.php'
+                        pathContains: 'my_workday'
                     },
                 })
             ],
