@@ -127,6 +127,10 @@ class TimeManagement {
     appendHtml() {
         let insertContainer = parent.document.getElementsByClassName('my_absences_stats_description_container times_overview_stats_description_container')[0];
 
+        if (parent.document.getElementById(Options.scriptName) !== null) {
+            return;
+        }
+
         insertContainer.insertAdjacentHTML("beforeend", this._moduleCollection.moduleHtml);
     }
 

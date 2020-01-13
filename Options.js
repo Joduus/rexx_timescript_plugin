@@ -1,4 +1,6 @@
 class Options {
+    static scriptName = 'Timescript';
+
     constructor() {
 
     }

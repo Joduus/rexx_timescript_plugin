@@ -44,11 +44,17 @@ class ModuleCollection {
             html += this._htmlModules[i].getHtml();
         }
 
+        html = this.addScriptWrapper(html);
+
         return html;
     }
 
     get hasNoMainLoopModules() {
         return Object.keys(this._mainLoopModules).length === 0;
+    }
+
+    addScriptWrapper(html) {
+        return '<div id="' + Options.scriptName + '">' + html + '</div>'
     }
 
     run(currentTime) {
