@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "build:contentscript-background": "NODE_ENV=production webpack --config resources/webpack.config.js",
+    "build:contentscript-background": "NODE_ENV=production webpack --config script/webpack.config.js",
     "build": "npm run build:contentscript-background",
-    "watch:contentscript-background": "NODE_ENV=development webpack --config resources/webpack.config.js -w",
+    "watch:contentscript-background": "NODE_ENV=development webpack --config script/webpack.config.js -w",
     "watch": "npm-run-all watch:*"
   },
   "devDependencies": {
