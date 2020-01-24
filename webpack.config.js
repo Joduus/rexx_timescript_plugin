@@ -1,3 +1,19 @@
+/*
+ * @copyright Copyright (c) rexx systems GmbH
+ *
+ * @link https://www.rexx-systems.com
+ *
+ * This software is protected by copyright.
+ *
+ * It is not permitted to copy, present, send, lease and / or lend the website
+ * or individual parts thereof without the consent of the copyright holder.
+ *
+ * Contravention of this law will result in proceedings under criminal
+ * or civil law.
+ *
+ * All rights reserved.
+ */
+
 const { CheckerPlugin } = require('awesome-typescript-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { optimize } = require('webpack');
@@ -17,7 +33,7 @@ module.exports = {
         background: join(__dirname, 'src/ts/chrome/background.ts'),
     },
     output: {
-        path: join(__dirname, 'src/js'),
+        path: join(__dirname, 'script/src/js'),
         filename: '[name].js',
     },
     module: {
