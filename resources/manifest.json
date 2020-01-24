@@ -1,0 +1,47 @@
+{
+  "name": "Timescript Plugin",
+  "version": "0.1",
+  "description": "Das Timescript in Pluginform",
+  "manifest_version": 2,
+  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*/calendar_list_widget.php*"],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "js": [
+        "src/js/module/core/Module.js",
+        "src/js/module/core/ModuleCollection.js",
+        "src/js/module/core/TimeHandler.js",
+        "src/js/classes/TimeCalculator.js",
+        "src/js/classes/TimeEntries.js",
+        "src/js/module/watcher/TimeEntryWatcher.js",
+        "src/js/module/handler/NotificationHandler.js",
+        "src/js/module/handler/WorktimeHandler.js",
+        "src/js/module/handler/BreaktimeHandler.js",
+        "src/js/module/handler/WorktimeLeftHandler.js",
+        "src/js/module/handler/BreaktimeLeftHandler.js",
+        "src/js/module/notifier/WorktimeNotificator.js",
+        "src/js/module/notifier/BreaktimeNotificator.js",
+        "src/js/core/Timemanagement.js",
+        "src/js/core/Options.js",
+        "src/js/module/provider/OptionsProvider.js",
+        "src/js/module/provider/TimeEntryProvider.js",
+        "src/js/chrome/contentScript.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": ["src/js/chrome/background.js"],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "src/js/popup/popup.html"
+  }
+}
